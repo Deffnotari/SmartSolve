@@ -11,6 +11,8 @@
       background: #f4f4f4;
     }
     input {
+      <input type="file" accept="image/*" capture="camera" id="imageInput">
+<button onclick="readImage()">Scan Image</button>
       padding: 10px;
       width: 250px;
       font-size: 16px;
@@ -27,7 +29,7 @@
       font-weight: bold;
     }
   </style>
-</head>
+</<script src="https://cdn.jsdelivr.net/npm/tesseract.js@2/dist/tesseract.min.js"></script>head>
 <body>
 
   <h1>Homework Calculator</h1>
@@ -48,7 +50,20 @@
         document.getElementById("result").innerText = "Invalid problem";
       }
     }
-  </script>
+  async function readImage() {
+  const file = document.getElementById("imageInput").files[0];
+  if (!file) return;
+
+  const { createWorker } = Tesseract;
+  const worker = await createWorker();
+  await worker.loadLanguage('eng');
+  await worker.initialize('eng');
+
+  const { data: { text } } = await worker.recognize(file);
+  document.getElementById("problem").value = text;
+
+  await worker.terminate();
+}</script>
 
 </body>
 </html>
