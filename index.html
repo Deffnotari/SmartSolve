@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Homework Calculator</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.11.0/math.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background: #f4f4f4;
+    }
+    input {
+      padding: 10px;
+      width: 250px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Homework Calculator</h1>
+  <p>Type a math problem:</p>
+
+  <input id="problem" placeholder="Example: 2*(3+4)">
+  <button onclick="solve()">Solve</button>
+
+  <div id="result"></div>
+
+  <script>
+    function solve() {
+      let input = document.getElementById("problem").value;
+      try {
+        let result = math.evaluate(input);
+        document.getElementById("result").innerText = "Answer: " + result;
+      } catch (error) {
+        document.getElementById("result").innerText = "Invalid problem";
+      }
+    }
+  </script>
+
+</body>
+</html>
